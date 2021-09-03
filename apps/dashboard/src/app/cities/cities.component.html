@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="col-50" layout="row" layout-align="center center">
+    <city-cities-list
+      [cities]="cities$ | async"
+      (selected)="selectCity($event)"
+      (deleted)="deleteCity($event)"
+      (cityViewed)="viewCity($event)"
+    ></city-cities-list>
+  </div>
+  <div class="col-50" layout="row" layout-align="center center">
+    <city-city-details
+      [form]="form"
+      [city]="selectedCity$ | async"
+      (saved)="saveCity($event)"
+      (cancelled)="cancel()"
+    ></city-city-details>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="info-container container">
+  <div class="col-50" layout="row" layout-align="center center">
+    <div *ngIf="currentCity$ | async as city">
+      <city-city-info [city]="currentCity$ | async"></city-city-info>
+    </div>
+  </div>
+</div>

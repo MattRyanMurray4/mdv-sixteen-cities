@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title *ngIf="currentCity.id; else createNew">
+      <h1>Update {{ originalName }}</h1>
+    </mat-card-title>
+    <ng-template #createNew>
+      <h1>Submit a New City</h1>
+    </ng-template>
+  </mat-card-header>
+  <form
+    [formGroup]="form"
+    #formDirective="ngForm"
+    (ngSubmit)="saveForm(formDirective)"
+  >
+    <mat-card-content>
+      <mat-form-field class="full-width" appearance="outline" floatlabel>
+        <mat-label>City Name</mat-label>
+        <input
+          matInput
+          placeholder="City Name"
+          formControlName="cityName"
+          type="text"
+          name="cityName"
+        />
+        <mat-error *ngIf="form.get('cityName')">Required Field</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="outline" floatlabel>
+        <mat-label>Location</mat-label>
+        <input
+          matInput
+          placeholder="Location"
+          formControlName="location"
+          type="text"
+          name="location"
+        />
+        <mat-error *ngIf="form.get('location')">Required Field</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="outline" floatlabel>
+        <mat-label>Facts</mat-label>
+        <input
+          matInput
+          placeholder="Facts"
+          formControlName="facts"
+          type="text"
+          name="facts"
+        />
+        <mat-error *ngIf="form.get('facts')">Required Field</mat-error>
+      </mat-form-field>
+      <section class="full-width">
+        <mat-label>
+          Crime-rate: {{ form.get('crimeRate')?.value }} %
+        </mat-label>
+        <mat-slider
+          formControlName="crimeRate"
+          class="full-width"
+          min="0"
+          max="100"
+          thumbLabel
+          tickInterval="1"
+        ></mat-slider>
+      </section>
+      <section>
+        <mat-checkbox formControlName="touristAttraction"
+          >Tourist Destination</mat-checkbox
+        >
+      </section>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" mat-button [disabled]="form.invalid">
+        {{ currentCity.id ? 'Submit' : 'Create' }}
+      </button>
+      <button type="button" mat-button (click)="cancel()">Cancel</button>
+    </mat-card-actions>
+  </form>
+</mat-card>
